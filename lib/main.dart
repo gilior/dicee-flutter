@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.red,
         appBar: AppBar(
           title: Text('Dicee'),
-//          backgroundColor: Colors.red,
+          backgroundColor: Colors.red,
         ),
         body: DicePage(),
       ),
@@ -28,83 +28,42 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
+  @override
   var num_1 = 1;
   var num_2 = 1;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    num_1 = Random().nextInt(5) + 1;
-    num_2 = Random().nextInt(5) + 1;
-
-    super.initState();
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              child: Image.asset(
+                'images/dice$num_1.png',
+              ),
+              onPressed: () {
+                Role_Dice();
+              },
+            ),
+          ),
+          Expanded(
+            child: FlatButton(
+              child: Image.asset(
+                'images/dice$num_2.png',
+              ),
+              onPressed: () {
+                Role_Dice();
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              color: Colors.red.shade400,
-              onPressed: () {
-                setState(() {
-                  num_1 = Random().nextInt(5) + 1;
-                  num_2 = Random().nextInt(5) + 1;
-                });
-              },
-              child: Text('Dicee'),
-            ),
-          ],
-        ),
-        Container(
-          color: Colors.yellowAccent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: RaisedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(38.0),
-                    child: Image(
-                      image:
-                          AssetImage('images/dice' + num_1.toString() + '.png'),
-//              width: 100,
-                    ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      num_1 = Random().nextInt(5) + 1;
-                    });
-                  },
-                ),
-              ),
-              Expanded(
-                child: RaisedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(38.0),
-                    child: Image(
-                      image:
-                          AssetImage('images/dice' + num_2.toString() + '.png'),
-//              width: 100,
-                    ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      num_2 = Random().nextInt(5) + 1;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+  void Role_Dice() {
+    setState(() {
+      num_1 = Random().nextInt(6) + 1;
+      num_2 = Random().nextInt(6) + 1;
+    });
   }
 }
